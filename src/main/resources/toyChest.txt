@@ -1,0 +1,4 @@
+host = jdbc:mysql://106.14.221.208:3306/toychest
+root = root
+password = I9e0n6_2w2q
+devMode = true
