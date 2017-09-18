@@ -63,23 +63,23 @@
                 #for(f:fl)
                 <tr>
                     <td>#(i).</td>
-                    <td>#(f)</td>
+                    <td id="food#(i)">#(f)</td>
                     <td>
                         <div class="progress progress-xs">
                             <div class="progress-bar progress-bar-info" style="width: 50%;"></div>
                         </div>
                     </td>
-                    <td><button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
+                    <td><button onclick="deleteFood(#(i))" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button></td>
                     #set(i = i + 1)
                 </tr>
                 #end
                 <tr>
                     <td>#(i).</td>
-                    <td><input type="text"></td>
+                    <td><input type="text" id="foodName"></td>
                     <td>
                         没有想吃的？那就新加食物选项!
                     </td>
-                    <td><button class="btn btn-success btn-sm"><i class="fa fa-plus"></i></button></td>
+                    <td><button class="btn btn-success btn-sm addFood"><i class="fa fa-plus"></i></button></td>
                     #set(i = i + 1)
                 </tr>
             </table>
@@ -94,6 +94,20 @@
         #end
         #("]")
         ;
+        $('.addFood').click(function() {
+            $.ajax({
+                type: "POST",
+                url: "/food",
+                data: {
+                    food: $('#foodName').val(),
+                    email: '#(user.account)',
+                    password: '#(user.password)'
+                }
+            })
+            setTimeout(function () {
+                location.reload();
+            }, 500);
+        })
         $('#pick').click(function () {
             var index = Math.floor((Math.random() * foodList.length));
             $('#result').val(foodList[index]);
@@ -101,6 +115,21 @@
         $('#remove').click(function () {
             $('#result').val('不喜欢？再抽一下呀！');
         })
+        function deleteFood(index) {
+            $.ajax({
+                type: "POST",
+                url: "/food/del",
+                data: {
+                    index: index,
+                    email: '#(user.account)',
+                    password: '#(user.password)'
+                }
+            })
+            setTimeout(function () {
+                location.reload();
+            }, 500);
+
+        }
     </script>
 </section>
 #end

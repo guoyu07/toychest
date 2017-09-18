@@ -5,10 +5,7 @@ import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.template.Engine;
-import controller.AuthController;
-import controller.IndexController;
-import controller.LoginController;
-import controller.RegisterController;
+import controller.*;
 import modal.User;
 
 public class toychestConfig extends JFinalConfig {
@@ -24,6 +21,7 @@ public class toychestConfig extends JFinalConfig {
         routes.add("/login", LoginController.class);
         routes.add("/user", IndexController.class);
         routes.add("/auth", AuthController.class);
+        routes.add("/food", FoodController.class);
     }
 
     public void configEngine(Engine engine) {
